@@ -1,0 +1,96 @@
+.materialtypes {
+  background-color: rgb(57, 62, 70);
+  color: white;
+}
+#contentabout {
+  background-color: rgb(155, 148, 147);
+  /* color: black; */
+}
+.contentBx {
+  color: black;
+}
+.footer {
+  background-color: rgb(34, 40, 49);
+}
+
+/* ---------------------row materials used---------------- */
+@media only screen and (min-width: 1200px) {
+  .types {
+    margin-left: 30%;
+  }
+}
+@media only screen and (min-width: 992px) {
+  .types {
+    margin-left: 25%;
+  }
+}
+@media only screen and (min-width: 768px) {
+  .types {
+    margin-left: 20%;
+  }
+}
+.types {
+  color: white;
+}
+.materialtypes {
+  padding: 100px;
+  text-align: center;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.bambo {
+  margin-top: 2%;
+  font-size: 20px;
+  font-weight: 300;
+  font-style: italic;
+  font-family: Roboto;
+  margin-bottom: 30px;
+}
+.hemp {
+  margin-top: 2%;
+  font-size: 20px;
+  font-weight: 300;
+  font-style: italic;
+  font-family: Roboto;
+  margin-bottom: 30px;
+}
+.cotton {
+  margin-top: 2%;
+  font-size: 20px;
+  font-weight: 300;
+  font-style: italic;
+  font-family: Roboto;
+  margin-bottom: 30px;
+}
+.elephantdung {
+  margin-top: 2%;
+  font-size: 20px;
+  font-weight: 300;
+  font-style: italic;
+  font-family: Roboto;
+  margin-bottom: 30px;
+}
+.recycledglass {
+  margin-top: 2%;
+  font-size: 20px;
+  font-weight: 300;
+  font-style: italic;
+  font-family: Roboto;
+  margin-bottom: 30px;
+}
+.bioplastic {
+  margin-top: 2%;
+  font-size: 20px;
+  font-weight: 300;
+  font-style: italic;
+  font-family: Roboto;
+  margin-bottom: 30px;
+}
+.imgtype {
+  width: 300px;
+  height: 300px;
+}
+#contentabout {
+  width: 100%;
+}

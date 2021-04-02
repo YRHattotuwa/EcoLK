@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang=en>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Eco LK</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body onload="setDefaults();">
+    <!--------------------------------------------------- BANNER ----------------------------------------------------------------->
+    <div class="banner">
+        <!-- header tag -->
+        <header>
+            <a href="#" class="logo"><img src="Images/Eco LK Logo/Eco_LK_logos.jpeg"></a>
+            <div class="toggle" onclick="toggle();"></div>
+        </header>
+        <img class="bannerImg" src="Images/Banners/1.jpg">
+        <!-- tea making process content -->
+        <div class="content">
+            <h2> So You Want To Do Good? </h2>
+            <p>“To do good, you actually have to do something.” – Yvon Chouinard</p>
+        </div>
+        <!-- Menu bar -->
+        <ul class="menu">
+            <li><a href="home.html">Home</a></li>
+            <li><a href="#">Eco-Friendly Products</a></li>
+            <li><a href="#">Eco Manufacturers </a></li>
+            <li><a href="rowMaterial.html">Raw Material Used </a></li>
+            <li><a href="shop.html">Shop</a></li>
+            <li><a href="#">Contact Us</a></li>
+        </ul>
+    </div>
+
+    <!--------------------------------------------------- FORM ----------------------------------------------------------------->
+    <form name="form1" id="form1">
+        <div class="form_sections">
+            <h4>Select your preferred manufacturer</h4></br>
+            <div class="question-answer">
+                <label><input type="radio" name="rdb_manufacturer" value="Eco-Products SL" id="ecoproductsl"
+                        onchange="setManufacturer()" checked="true" /> Eco-Products SL</label></br>
+                <label><input type="radio" name="rdb_manufacturer" value="Ecoware Lanka" id="ecowarelanka"
+                        onchange="setManufacturer()" /> Ecoware Lanka</label></br>
+                <label><input type="radio" name="rdb_manufacturer" value="Trickledown" id="trickledown"
+                        onchange="setManufacturer()" /> Trickledown</label></br>
+                <label><input type="radio" name="rdb_manufacturer" value="BacktoEarth" id="backtoearth"
+                        onchange="setManufacturer()" /> BacktoEarth</label></br>
+            </div>
+        </div>
+
+        <div class="form_sections">
+            <h4>Select your product</h4></br>
+            <div class="question-answer">
+                <label><input type="radio" name="rdb_product" value="Bags" id="bags" onchange="setProduct()"
+                        checked="true" /> Bags</label></br>
+                <label><input type="radio" name="rdb_product" value="Plates" id="plates" onchange="setProduct()" />
+                    Plates</label></br>
+                <label><input type="radio" name="rdb_product" value="Mugs" id="mugs" onchange="setProduct()" />
+                    Mugs</label></br>
+                <label><input type="radio" name="rdb_product" value="Soap" id="soap" onchange="setProduct()" />
+                    Soap</label></br>
+            </div>
+        </div>
+
+        <div class="form_sections">
+            <h4>Select the size of the product</h4></br>
+            <div class="question-answer">
+                <label><input type="radio" name="rdb_size" value="Small" id="small" onchange="setSize()" />
+                    Small</label></br>
+                <label><input type="radio" name="rdb_size" value="Medium" id="medium" onchange="setSize()"
+                        checked="true" /> Medium</label></br>
+                <label><input type="radio" name="rdb_size" value="Large" id="large" onchange="setSize()" />
+                    Large</label></br>
+            </div>
+        </div>
+
+        <div class="form_sections">
+            <h4>Extras</h4></br>
+            <select name="others" id="others" onclick="setExtras()">
+                <option value="Eco-friendly packaging" id="ecofriendlypackaging">Eco-friendly packaging</option>
+                <option value="Eco-friendly greeting cards" id="ecofriendlygreetingcards">Eco-friendly greeting cards
+                </option>
+                <option value="Eco-friendly decorations" id="ecofriendlydecorations">Eco-friendly decorations</option>
+            </select>
+        </div>
+    </form>
+
+    <section class="buttons">
+        <div>
+            <button name="submit" id="btn_order" class="submit">ADD TO ORDER</button>
+            <button name="submit" id="btn_favourite" class="submit" onclick="setFavourite()">ADD TO FAVOURITES</button>
+        </div>
+    </section>
+
+    <div class="current_order">
+        <h1>Current Order</h1></br>
+        <div class="inner_current_order">
+            Brand : <p id="current_order_brand"></p>
+            Product : <p id="current_order_product"></p>
+            Size : <p id="current_order_size"></p>
+            Extras : <p id="current_order_extras"></p>
+        </div>
+        <br />
+        <h3>TOTAL PRICE : <p id="current_order_total"></p>
+        </h3>
+    </div>
+    <br/>
+    <br/>
+    <br/>
+
+    <div class="current_order">
+        <h1>Favourite Order</h1></br>
+        <div class="inner_current_order">
+            Brand : <p id="favourite_order_brand"></p>
+            Product : <p id="favourite_order_product"></p>
+            Size : <p id="favourite_order_size"></p>
+            Extras : <p id="favourite_order_extras"></p>
+        </div>
+        <br />
+        <h3>TOTAL PRICE : <p id="favourite_order_total"></p>
+        </h3>
+    </div>
+
+    <script type="text/javascript">
+        function setDefaults() {
+            document.getElementById("current_order_brand").innerHTML = "Eco-Products SL";
+            document.getElementById("current_order_product").innerHTML = "Bags";
+            var priceproduct = 1000;
+            document.getElementById("current_order_size").innerHTML = "Medium";
+            var pricesize = 2500;
+            document.getElementById("current_order_extras").innerHTML = "Eco-friendly packaging";
+            var priceextras = 500;
+            var total = priceproduct + pricesize + priceextras;
+            document.getElementById("current_order_total").innerHTML = total;
+        }
+
+        function setManufacturer() {
+            if (document.getElementById('ecoproductsl').checked) {
+                x = document.getElementById('ecoproductsl').value;
+                document.getElementById("current_order_brand").innerHTML = x;
+            }
+            else if (document.getElementById('ecowarelanka').checked) {
+                x = document.getElementById('ecowarelanka').value;
+                document.getElementById("current_order_brand").innerHTML = x;
+            }
+            else if (document.getElementById('trickledown').checked) {
+                x = document.getElementById('trickledown').value;
+                document.getElementById("current_order_brand").innerHTML = x;
+            }
+            else if (document.getElementById('backtoearth').checked) {
+                x = document.getElementById('backtoearth').value;
+                document.getElementById("current_order_brand").innerHTML = x;
+            }
+        }
+
+        function setProduct() {
+            if (document.getElementById('bags').checked) {
+                x = document.getElementById('bags').value;
+                document.getElementById("current_order_product").innerHTML = x;
+                var priceproduct = 1000;
+
+                if (document.getElementById('small').checked) {
+                    y = document.getElementById('small').value;
+                    document.getElementById("current_order_size").innerHTML = y;
+                    var pricesize = 0
+                }
+                else if (document.getElementById('medium').checked) {
+                    y = document.getElementById('medium').value;
+                    document.getElementById("current_order_size").innerHTML = y;
+                    var pricesize = 2500;
+                }
+                else if (document.getElementById('large').checked) {
+                    y = document.getElementById('large').value;
+                    document.getElementById("current_order_size").innerHTML = y;
+                    var pricesize = 5000;
+                }
+                var z = document.getElementById("others").value;
+                document.getElementById("current_order_extras").innerHTML = z;
+
+                if (z = "Eco-friendly packaging") {
+                    var priceextras = 500;
+                }
+                else if (z = "Eco-friendly greeting cards") {
+                    var priceextras = 1000;
+                }
+                else if (z = "Eco-friendly decorations") {
+                    var priceextras = 1500;
+                }
+                var total = priceproduct + pricesize + priceextras;
+                document.getElementById("current_order_total").innerHTML = total;
+
+            }
+            else if (document.getElementById('plates').checked) {
+                x = document.getElementById('plates').value;
+                document.getElementById("current_order_product").innerHTML = x;
+                var priceproduct = 2000;
+
+                if (document.getElementById('small').checked) {
+                    y = document.getElementById('small').value;
+                    document.getElementById("current_order_size").innerHTML = y;
+                    var pricesize = 0
+                }
+                else if (document.getElementById('medium').checked) {
+                    y = document.getElementById('medium').value;
+                    document.getElementById("current_order_size").innerHTML = y;
+                    var pricesize = 2500;
+                }
+                else if (document.getElementById('large').checked) {
+                    y = document.getElementById('large').value;
+                    document.getElementById("current_order_size").innerHTML = y;
+                    var pricesize = 5000;
+                }
+                var z = document.getElementById("others").value;
+                document.getElementById("current_order_extras").innerHTML = z;
+
+                if (z = "Eco-friendly packaging") {
+                    var priceextras = 500;
+                }
+                else if (z = "Eco-friendly greeting cards") {
+                    var priceextras = 1000;
+                }
+                else if (z = "Eco-friendly decorations") {
+                    var priceextras = 1500;
+                }
+                var total = priceproduct + pricesize + priceextras;
+                document.getElementById("current_order_total").innerHTML = total;
+
+            }
+            else if (document.getElementById('mugs').checked) {
+                x = document.getElementById('mugs').value;
+                document.getElementById("current_order_product").innerHTML = x;
+                var priceproduct = 2500;
+
+                if (document.getElementById('small').checked) {
+                    y = document.getElementById('small').value;
+                    document.getElementById("current_order_size").innerHTML = y;
+                    var pricesize = 0
+                }
+                else if (document.getElementById('medium').checked) {
+                    y = document.getElementById('medium').value;
+                    document.getElementById("current_order_size").innerHTML = y;
+                    var pricesize = 2500;
+                }
+                else if (document.getElementById('large').checked) {
+                    y = document.getElementById('large').value;
+                    document.getElementById("current_order_size").innerHTML = y;
+                    var pricesize = 5000;
+                }
+                var z = document.getElementById("others").value;
+                document.getElementById("current_order_extras").innerHTML = z;
+
+                if (z = "Eco-friendly packaging") {
+                    var priceextras = 500;
+                }
+                else if (z = "Eco-friendly greeting cards") {
+                    var priceextras = 1000;
+                }
+                else if (z = "Eco-friendly decorations") {
+                    var priceextras = 1500;
+                }
+                var total = priceproduct + pricesize + priceextras;
+                document.getElementById("current_order_total").innerHTML = total;
+
+            }
+            else if (document.getElementById('soap').checked) {
+                x = document.getElementById('soap').value;
+                document.getElementById("current_order_product").innerHTML = x;
+                var priceproduct = 800;
+
+                if (document.getElementById('small').checked) {
+                    y = document.getElementById('small').value;
+                    document.getElementById("current_order_size").innerHTML = y;
+                    var pricesize = 0
+                }
+                else if (document.getElementById('medium').checked) {
+                    y = document.getElementById('medium').value;
+                    document.getElementById("current_order_size").innerHTML = y;
+                    var pricesize = 2500;
+                }
+                else if (document.getElementById('large').checked) {
+                    y = document.getElementById('large').value;
+                    document.getElementById("current_order_size").innerHTML = y;
+                    var pricesize = 5000;
+                }
+                var z = document.getElementById("others").value;
+                document.getElementById("current_order_extras").innerHTML = z;
+
+                if (z = "Eco-friendly packaging") {
+                    var priceextras = 500;
+                }
+                else if (z = "Eco-friendly greeting cards") {
+                    var priceextras = 1000;
+                }
+                else if (z = "Eco-friendly decorations") {
+                    var priceextras = 1500;
+                }
+                var total = priceproduct + pricesize + priceextras;
+                document.getElementById("current_order_total").innerHTML = total;
+
+            }
+        }
+
+        function setSize() {
+            if (document.getElementById('small').checked) {
+                x = document.getElementById('small').value;
+                document.getElementById("current_order_size").innerHTML = x;
+                var pricesize = 0;
+
+                if (document.getElementById('bags').checked) {
+                    x = document.getElementById('bags').value;
+                    document.getElementById("current_order_product").innerHTML = x;
+                    var priceproduct = 1000;
+                }
+                else if (document.getElementById('plates').checked) {
+                    x = document.getElementById('plates').value;
+                    document.getElementById("current_order_product").innerHTML = x;
+                    var priceproduct = 2000;
+                }
+                else if (document.getElementById('mugs').checked) {
+                    x = document.getElementById('mugs').value;
+                    document.getElementById("current_order_product").innerHTML = x;
+                    var priceproduct = 2500;
+                }
+                else if (document.getElementById('soap').checked) {
+                    x = document.getElementById('soap').value;
+                    document.getElementById("current_order_product").innerHTML = x;
+                    var priceproduct = 800;
+                }
+                var z = document.getElementById("others").value;
+                document.getElementById("current_order_extras").innerHTML = z;
+
+                if (z = "Eco-friendly packaging") {
+                    var priceextras = 500;
+                }
+                else if (z = "Eco-friendly greeting cards") {
+                    var priceextras = 1000;
+                }
+                else if (z = "Eco-friendly decorations") {
+                    var priceextras = 1500;
+                }
+                var total = priceproduct + pricesize + priceextras;
+                document.getElementById("current_order_total").innerHTML = total;
+
+            }
+            else if (document.getElementById('medium').checked) {
+                x = document.getElementById('medium').value;
+                document.getElementById("current_order_size").innerHTML = x;
+                var pricesize = 2500;
+
+                if (document.getElementById('bags').checked) {
+                    x = document.getElementById('bags').value;
+                    document.getElementById("current_order_product").innerHTML = x;
+                    var priceproduct = 1000;
+                }
+                else if (document.getElementById('plates').checked) {
+                    x = document.getElementById('plates').value;
+                    document.getElementById("current_order_product").innerHTML = x;
+                    var priceproduct = 2000;
+                }
+                else if (document.getElementById('mugs').checked) {
+                    x = document.getElementById('mugs').value;
+                    document.getElementById("current_order_product").innerHTML = x;
+                    var priceproduct = 2500;
+                }
+                else if (document.getElementById('soap').checked) {
+                    x = document.getElementById('soap').value;
+                    document.getElementById("current_order_product").innerHTML = x;
+                    var priceproduct = 800;
+                }
+                var z = document.getElementById("others").value;
+                document.getElementById("current_order_extras").innerHTML = z;
+
+                if (z = "Eco-friendly packaging") {
+                    var priceextras = 500;
+                }
+                else if (z = "Eco-friendly greeting cards") {
+                    var priceextras = 1000;
+                }
+                else if (z = "Eco-friendly decorations") {
+                    var priceextras = 1500;
+                }
+                var total = priceproduct + pricesize + priceextras;
+                document.getElementById("current_order_total").innerHTML = total;
+
+            }
+            else if (document.getElementById('large').checked) {
+                x = document.getElementById('large').value;
+                document.getElementById("current_order_size").innerHTML = x;
+                var pricesize = 5000;
+
+                if (document.getElementById('bags').checked) {
+                    x = document.getElementById('bags').value;
+                    document.getElementById("current_order_product").innerHTML = x;
+                    var priceproduct = 1000;
+                }
+                else if (document.getElementById('plates').checked) {
+                    x = document.getElementById('plates').value;
+                    document.getElementById("current_order_product").innerHTML = x;
+                    var priceproduct = 2000;
+                }
+                else if (document.getElementById('mugs').checked) {
+                    x = document.getElementById('mugs').value;
+                    document.getElementById("current_order_product").innerHTML = x;
+                    var priceproduct = 2500;
+                }
+                else if (document.getElementById('soap').checked) {
+                    x = document.getElementById('soap').value;
+                    document.getElementById("current_order_product").innerHTML = x;
+                    var priceproduct = 800;
+                }
+                var z = document.getElementById("others").value;
+                document.getElementById("current_order_extras").innerHTML = z;
+
+                if (z = "Eco-friendly packaging") {
+                    var priceextras = 500;
+                }
+                else if (z = "Eco-friendly greeting cards") {
+                    var priceextras = 1000;
+                }
+                else if (z = "Eco-friendly decorations") {
+                    var priceextras = 1500;
+                }
+                var total = priceproduct + pricesize + priceextras;
+                document.getElementById("current_order_total").innerHTML = total;
+
+            }
+        }
+
+        function setExtras() {
+            var z = document.getElementById("others").value;
+            document.getElementById("current_order_extras").innerHTML = z;
+
+            if (z = "Eco-friendly packaging") {
+                var priceextras = 500;
+
+                if (document.getElementById('bags').checked) {
+                x = document.getElementById('bags').value;
+                document.getElementById("current_order_product").innerHTML = x;
+                var priceproduct = 1000;
+                }
+                else if (document.getElementById('plates').checked) {
+                x = document.getElementById('plates').value;
+                document.getElementById("current_order_product").innerHTML = x;
+                var priceproduct = 2000;
+                }
+                else if (document.getElementById('mugs').checked) {
+                x = document.getElementById('mugs').value;
+                document.getElementById("current_order_product").innerHTML = x;
+                var priceproduct = 2500;
+                }
+                else if (document.getElementById('soap').checked) {
+                x = document.getElementById('soap').value;
+                document.getElementById("current_order_product").innerHTML = x;
+                var priceproduct = 800;
+                }
+                if (document.getElementById('small').checked) {
+                x = document.getElementById('small').value;
+                document.getElementById("current_order_size").innerHTML = x;
+                var pricesize = 0;
+                }
+                else if (document.getElementById('medium').checked) {
+                x = document.getElementById('medium').value;
+                document.getElementById("current_order_size").innerHTML = x;
+                var pricesize = 2500;
+                }
+                else if (document.getElementById('large').checked) {
+                x = document.getElementById('large').value;
+                document.getElementById("current_order_size").innerHTML = x;
+                var pricesize = 5000;
+                }
+                var total = priceproduct + pricesize + priceextras;
+                document.getElementById("current_order_total").innerHTML = total;
+
+            }
+            else if (z = "Eco-friendly greeting cards") {
+                var priceextras = 1000;
+
+                if (document.getElementById('bags').checked) {
+                x = document.getElementById('bags').value;
+                document.getElementById("current_order_product").innerHTML = x;
+                var priceproduct = 1000;
+                }
+                else if (document.getElementById('plates').checked) {
+                x = document.getElementById('plates').value;
+                document.getElementById("current_order_product").innerHTML = x;
+                var priceproduct = 2000;
+                }
+                else if (document.getElementById('mugs').checked) {
+                x = document.getElementById('mugs').value;
+                document.getElementById("current_order_product").innerHTML = x;
+                var priceproduct = 2500;
+                }
+                else if (document.getElementById('soap').checked) {
+                x = document.getElementById('soap').value;
+                document.getElementById("current_order_product").innerHTML = x;
+                var priceproduct = 800;
+                }
+                if (document.getElementById('small').checked) {
+                x = document.getElementById('small').value;
+                document.getElementById("current_order_size").innerHTML = x;
+                var pricesize = 0;
+                }
+                else if (document.getElementById('medium').checked) {
+                x = document.getElementById('medium').value;
+                document.getElementById("current_order_size").innerHTML = x;
+                var pricesize = 2500;
+                }
+                else if (document.getElementById('large').checked) {
+                x = document.getElementById('large').value;
+                document.getElementById("current_order_size").innerHTML = x;
+                var pricesize = 5000;
+                }
+                var total = priceproduct + pricesize + priceextras;
+                document.getElementById("current_order_total").innerHTML = total;
+
+            }
+            else if (z = "Eco-friendly decorations") {
+                var priceextras = 1500;
+
+                if (document.getElementById('bags').checked) {
+                x = document.getElementById('bags').value;
+                document.getElementById("current_order_product").innerHTML = x;
+                var priceproduct = 1000;
+                }
+                else if (document.getElementById('plates').checked) {
+                x = document.getElementById('plates').value;
+                document.getElementById("current_order_product").innerHTML = x;
+                var priceproduct = 2000;
+                }
+                else if (document.getElementById('mugs').checked) {
+                x = document.getElementById('mugs').value;
+                document.getElementById("current_order_product").innerHTML = x;
+                var priceproduct = 2500;
+                }
+                else if (document.getElementById('soap').checked) {
+                x = document.getElementById('soap').value;
+                document.getElementById("current_order_product").innerHTML = x;
+                var priceproduct = 800;
+                }
+                if (document.getElementById('small').checked) {
+                x = document.getElementById('small').value;
+                document.getElementById("current_order_size").innerHTML = x;
+                var pricesize = 0;
+                }
+                else if (document.getElementById('medium').checked) {
+                x = document.getElementById('medium').value;
+                document.getElementById("current_order_size").innerHTML = x;
+                var pricesize = 2500;
+                }
+                else if (document.getElementById('large').checked) {
+                x = document.getElementById('large').value;
+                document.getElementById("current_order_size").innerHTML = x;
+                var pricesize = 5000;
+                }
+                var total = priceproduct + pricesize + priceextras;
+                document.getElementById("current_order_total").innerHTML = total;
+
+            }
+        }
+
+        setFavourite()
+        {
+            alert ("clicked");
+        }
+    </script>
+
+    <!--------------------------------------------------- FOOTER ----------------------------------------------------------------->
+    <!-- <footer class="footer">
+        <div class="footer-left">
+            <img src="Images/Eco LK Logo/Eco_LK_logos.jpeg">
+            <p>Sri Lankan Eco Friendly Products for a Greener Tomorrow!</p>
+
+        </div>
+
+        <ul class="footer-right">
+            <li>
+                <h2>Eco LK</h2>
+                <ul class="box">
+                    <li><a href="#">Eco LK Story </a></li>
+                    <li><a href="#">Types of Eco-Friendly Products</a></li>
+                    <li><a href="#">Eco friendly product Manufacturers</a></li>
+                    <li><a href="#">Shop</a></li>
+                </ul>
+            </li>
+            <li>
+                <h2>Services</h2>
+                <ul class="box">
+                    <li><a href="#">Help</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms of Service</a></li>
+                    <li><a href="#">Refund Policy</a></li>
+                    <li><a href="#">Shipping Policy</a></li>
+                </ul>
+            </li>
+            <li class="feature">
+                <h2>Contact</h2>
+                <ul class="box">
+                    <li></li><a href="#">Catalogue Request</a>
+            </li>
+            <li></li><a href="#">Contact Us</a></li>
+        </ul>
+        <div class="social">
+            <a href="https://facebook.com"><i class="fa fa-facebook"></i></a>
+            <a href="https://instagram.com"><i class="fa fa-instagram"></i></a>
+            <a href="https://linkedin.com"><i class="fa fa-linkedin"></i></a>
+        </div>
+        </li>
+        <li>
+            <h2>Useful Links</h2>
+            <ul class="box">
+                <li></li><a href="https://www.pexels.com/search/eco%20friendly%20material/">Pexels</a>
+        </li>
+        <li></li><a href="https://www.youtube.com/">You Tube</a></li>
+        </ul>
+        </li>
+
+        </ul>
+        <div class="footer-bottom">
+            <p>Copyright © 2021 Eco LK. All rights reserved</p>
+        </div>
+    </footer>
+
+
+    <script type="text/javascript" src="home.js"></script> -->
+
+</body>
+
+</html>
