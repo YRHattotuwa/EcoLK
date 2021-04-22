@@ -110,19 +110,36 @@
 /* toggle buttun for menu */
 .banner header .toggle {
   position: relative;
-  width: 30px;
-  height: 30px;
-  background: url(images/toggle.png);
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;
+  width: 50px;
+  height: 50px;
   cursor: pointer;
+  background: none;
+  border: none;
+  outline: none;
+}
+.banner header .toggle span {
+  display: block;
+  height: 3px;
+  background-color: #fff;
+  margin: 6px 0;
+  position: relative;
+  transition: 0.3s linear;
 }
 .banner header .toggle.active {
-  background: url(images/close.png);
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
+}
+.banner header .toggle.active span:nth-child(1) {
+  transform: rotate(-45deg);
+  top: 4px;
+}
+.banner header .toggle.active span:nth-child(2) {
+  opacity: 0;
+}
+.banner header .toggle.active span:nth-child(3) {
+  transform: rotate(45deg);
+  bottom: 14px;
 }
 /* details related tea manufacturing */
 .content {
